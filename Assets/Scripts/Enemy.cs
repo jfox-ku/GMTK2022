@@ -8,13 +8,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private int enemyTypeIndex = 0;
-    
+    public Action EnemyDestroyedEvent;
+
     [SerializeField]
     private Enemies AllEnemies;
     public EnemyDataSO EnemyData;
     public Destroyable Dest;
     public Rigidbody RB;
     public GameObject EnemyModelObject;
+    public Tweener EnemyTweener;
 
     private void Start()
     {
@@ -32,9 +34,15 @@ public class Enemy : MonoBehaviour
         
     }
 
+    public void SetEnemyTarget(Transform target)
+    {
+        EnemyTweener.UpdateTarget(target);
+    }
+
     private void Destroyed()
     {
         Dest.Destroyed -= Destroyed;
+        EnemyDestroyedEvent?.Invoke();
         ParticleManager.Instance.PlayChipDestoyEffect(transform, Vector3.up, Vector3.one);
     }
 }

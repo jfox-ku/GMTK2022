@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector.Editor;
+﻿using System.Collections;
+using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -14,5 +15,16 @@ namespace DefaultNamespace
         {
            v[1] = t;
         }
+
+        public static IEnumerator StickRoutine(this Transform source, Transform target, Vector3 offset, float duration)
+        {
+            var startTime = Time.time;
+            while (Time.time < startTime + duration)
+            {
+                source.position = target.position + offset;
+                yield return null;
+            }
+        }
+        
     }
 }

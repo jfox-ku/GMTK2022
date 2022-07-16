@@ -28,7 +28,12 @@ public class DiceNumberController : MonoBehaviour
 
     public void SetRandomTop()
     {
-        ShiftIndexes(Random.Range(0,6));
+        var nextTop = Random.Range(1, 6);
+        while (nextTop == TopNum)
+        {
+            nextTop = Random.Range(1, 6);
+        }
+        ShiftIndexes(nextTop);
     }
     
 }
