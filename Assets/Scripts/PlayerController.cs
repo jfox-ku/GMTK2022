@@ -81,6 +81,6 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
-        UpdateVelocity(Vector3.forward);
+        //UpdateVelocity(Vector3.forward);
     }
 }

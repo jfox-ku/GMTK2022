@@ -11,5 +11,16 @@ namespace DefaultNamespace.SO
         [TitleGroup("Data"),AssetsOnly,PreviewField]
         public Attack AttackPrefab;
 
+        public Attack Spawn(Transform start,Transform target)
+        {
+            var obj = Instantiate<Attack>(AttackPrefab);
+            obj.transform.position = start.position;
+            obj.Tweener.SetSpeed(AttackTravelSpeed);
+            obj.Tweener.UpdateTarget(target);
+            obj.Damage = AttackDamage;
+
+            return obj;
+        }
+        
     }
 }
