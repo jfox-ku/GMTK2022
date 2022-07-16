@@ -16,6 +16,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     private int attackIndex;
     
+    
+    public static Action<float> AttackCooldownLeftPercent;
+    
     [Button]
     public void Start()
     {
@@ -65,6 +68,11 @@ public class PlayerAttack : MonoBehaviour
                     lastAttackTime = Time.time;
                 }
 
+            }
+            else
+            {
+                var timeLeft = lastAttackTime + AttackData.AttackCooldown - Time.time;
+                AttackCooldownLeftPercent?.Invoke(timeLeft/AttackData.AttackCooldown);
             }
           
             yield return null;

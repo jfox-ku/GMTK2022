@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     public Destroyable Dest;
     public Rigidbody RB;
     public GameObject EnemyModelObject;
+    public Tweener EnemyTweener;
 
     private void Start()
     {
@@ -30,6 +31,11 @@ public class Enemy : MonoBehaviour
         EnemyModelObject = Instantiate(EnemyData.Prefab,transform);
         Dest.health = EnemyData.Health;
         
+    }
+
+    public void SetEnemyTarget(Transform target)
+    {
+        EnemyTweener.UpdateTarget(target);
     }
 
     private void Destroyed()

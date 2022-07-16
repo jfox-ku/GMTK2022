@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
 {
     public static ParticleManager Instance;
-    public GameObject HitEffect, BulletExpEffect, ChipDestroyEffect;
+    public GameObject HitEffect, BulletExpEffect, ChipDestroyEffect, PlayerDamagedParticle;
 
 
     // Start is called before the first frame update
@@ -32,4 +33,13 @@ public class ParticleManager : MonoBehaviour
         effect.transform.position = target.transform.position + offset;
         effect.transform.localScale = scale;
     }
+
+    public void PlayPlayerDamagedParticle(Transform target, Vector3 offset)
+    {
+        var effect = Instantiate(PlayerDamagedParticle, transform);
+        effect.transform.position = target.transform.position + offset;
+        StartCoroutine(effect.transform.StickRoutine(target, offset, 1f));
+    }
+    
+    
 }

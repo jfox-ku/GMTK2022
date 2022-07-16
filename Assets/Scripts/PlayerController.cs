@@ -7,6 +7,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController PlayerInstance;
+    
+    [TitleGroup("Health")]
+    public Destroyable Dest;
+
+    [TitleGroup("Health")] public float ImmunityDuration, ImmunityCooldown, LastImmunityTime;
     [TitleGroup("Movement")] public Rigidbody RB;
     [TitleGroup("Movement")] public float MoveSpeed = 1f;
 
@@ -20,6 +26,18 @@ public class PlayerController : MonoBehaviour
     public AnimationCurve DashMoveCurve;
     [SerializeField] public ParticleSystem DashParticle;
     [SerializeField] private DiceNumberController DiceNumberController;
+
+    public static Transform PlayerDice => PlayerInstance.RB.transform;
+
+    public bool IsImmune => LastImmunityTime + ImmunityDuration < Time.time;
+    public bool IsImmuneInCooldown => LastImmunityTime + ImmunityCooldown > Time.time;
+    
+    private void Awake()
+    {
+        //Dest.health = 100f;
+        Dest.isPlayer = true;
+        PlayerInstance = this;
+    }
 
     private void Start()
     {
@@ -92,5 +110,14 @@ public class PlayerController : MonoBehaviour
         
         DiceNumberController.SetRandomTop();
         UpdateVelocity(Vector3.zero);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Destroyable") && !IsImmune && !IsImmuneInCooldown)
+        {
+            LastImmunityTime = Time.time;
+            Dest.TakeDamage(5);
+        }
     }
 }

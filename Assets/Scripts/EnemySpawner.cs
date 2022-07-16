@@ -38,6 +38,7 @@ public class EnemySpawner : MonoBehaviour
                 var enemy = Instantiate(EnemyBase,transform);
                 enemy.transform.localPosition = Vector3.zero;
                 enemy.SetEnemyType(SpawnIndex);
+                enemy.SetEnemyTarget(PlayerController.PlayerDice);
             }
             
             yield return null;
