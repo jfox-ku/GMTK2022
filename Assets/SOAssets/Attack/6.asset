@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9efd5935461042eaa6f1c1dc0d63bf14, type: 3}
   m_Name: 6
   m_EditorClassIdentifier: 
-  AttackCooldown: 1.2
-  AttackDamage: 10
-  AttackTravelSpeed: 0.2
+  AttackCooldown: 0.2
+  AttackDamage: 20
+  AttackTravelSpeed: 1
   AttackRange: 20
   AttackLifetime: 1
   AttackPrefab: {fileID: 4114223134992409315, guid: 67e890468c2c9c24b93fcb59c73faf00, type: 3}
+  AttackBackward: 1

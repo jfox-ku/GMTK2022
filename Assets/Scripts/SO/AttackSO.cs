@@ -11,6 +11,8 @@ namespace DefaultNamespace.SO
         [TitleGroup("Data"),AssetsOnly,PreviewField]
         public Attack AttackPrefab;
 
+        [TitleGroup("Data")] public bool AttackBackward;
+
         public Attack Spawn(Transform start,Transform target)
         {
             Attack obj = Instantiate(AttackPrefab);

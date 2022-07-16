@@ -8,7 +8,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public List<AttackSO> AttackDatum;
-    public AttackSO AttackData => AttackDatum[attackIndex];
+    public AttackSO AttackData => AttackDatum[Mathf.Clamp(attackIndex ,0,6)];
     public Transform Dice;
     public Transform CurrentTarget;
 
@@ -18,19 +18,23 @@ public class PlayerAttack : MonoBehaviour
     
     
     public static Action<float> AttackCooldownLeftPercent;
-    
+
+    private void Awake()
+    {
+        DiceNumberController.TopNumberChanged += SetAttackIndex;
+    }
+
     [Button]
     public void Start()
     {
         FindTarget();
-        DiceNumberController.TopNumberChanged += SetAttackIndex;
         AttackRoutine = StartCoroutine(Attack());
     }
 
-    private void SetAttackIndex(int i)
+    private void SetAttackIndex(int topNum)
     {
         if(AttackRoutine!=null) StopCoroutine(AttackRoutine);
-        attackIndex = i;
+        attackIndex = topNum - 1;
         AttackRoutine = StartCoroutine(Attack());
     }
 
@@ -53,7 +57,29 @@ public class PlayerAttack : MonoBehaviour
         }
         
     }
-    
+
+    public Vector3 ClosestEnemyDirection()
+    {
+        var position = Dice.transform.position;
+        var isHit = Physics.SphereCast(position, 50f, Vector3.forward,out var hit, 20f);
+        if (isHit) return (hit.point - position).normalized;
+        else return Dice.transform.forward;
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (Application.isPlaying)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(Dice.transform.position,ClosestEnemyDirection());
+            var position = Dice.transform.position;
+            // var isHit = Physics.SphereCast(position, 50f, Vector3.forward,out var hit, 20f);
+            // if(isHit) Gizmos.DrawWireSphere(Dice.position + transform.forward * hit.distance,50f);
+            //
+        }
+    }
+
     IEnumerator Attack()
     {
         var lastAttackTime = Time.time -  AttackData.AttackCooldown - 1f;
@@ -64,7 +90,7 @@ public class PlayerAttack : MonoBehaviour
                 if (CurrentTarget != null)
                 {
                     var dice = Dice.transform;
-                    AttackData.Spawn(dice,dice.forward);
+                    AttackData.Spawn(dice,AttackData.AttackBackward? -dice.forward : Dice.forward);
                     lastAttackTime = Time.time;
                 }
 
