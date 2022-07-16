@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9efd5935461042eaa6f1c1dc0d63bf14, type: 3}
-  m_Name: 1
+  m_Script: {fileID: 11500000, guid: 26f6a8956b5a27d49b150c9856b7d206, type: 3}
+  m_Name: Enemy_100DollarChip
   m_EditorClassIdentifier: 
-  AttackCooldown: 1
-  AttackDamage: 10
-  AttackTravelSpeed: 10
-  AttackRange: 20
-  AttackPrefab: {fileID: 4114223134992409315, guid: 67e890468c2c9c24b93fcb59c73faf00, type: 3}
+  Health: 60
+  ChaseSpeed: 0.05
+  Prefab: {fileID: 8111902545066073920, guid: b33649103884c0c409b258f05f17e4f2, type: 3}

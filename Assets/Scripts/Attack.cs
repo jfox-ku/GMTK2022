@@ -21,28 +21,30 @@ public class Attack : MonoBehaviour
         var startTime = Time.time;
         while (Time.time < startTime + AttackLifetime)
         {
-            transform.Translate(dir * AttackTravelSpeed);
+            transform.Translate(dir.normalized * AttackTravelSpeed);
             yield return null;
         }
         
-        DestroyAttack();
+        DestroyAttack(true);
     }
     
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Destroyable"))
         {
-            if (collision.gameObject.TryGetComponent<Destroyable>(out var dest))
+            if (collision.rigidbody.TryGetComponent<Destroyable>(out var dest))
             {
                 dest.TakeDamage(Damage);
+                ParticleManager.Instance.PlayHitEffect(this.transform,Vector3.zero);
                 DestroyAttack();
             }
         }
     }
 
-    public void DestroyAttack()
+    public void DestroyAttack(bool expire=false)
     {
         if(MoveRoutineRef!=null) StopCoroutine(MoveRoutineRef);
+        if(expire) ParticleManager.Instance.BulletExpireEffect(transform,Vector3.zero);
         Destroy(this.gameObject);
     }
 }

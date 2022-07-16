@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -47,8 +48,10 @@ public class PlayerController : MonoBehaviour
 
     public void UpdateVelocity(Vector3 input)
     {
+        var savedY = RB.velocity.y;
         RB.velocity = Vector3.Lerp(RB.velocity, input.normalized * MoveSpeed, 0.5f);
-        if (RB.velocity.magnitude > 0.1f)
+        RB.velocity.ChangeY(savedY);
+        if (RB.velocity.magnitude > 0.15f)
         {
             UpdateFaceDirection(RotationPercent);
         }
