@@ -13,27 +13,41 @@ public class PlayerAttack : MonoBehaviour
     [Button]
     public void Start()
     {
+        FindTarget();
         StartCoroutine(Attack());
     }
-
-    public float AttackRange;
     
+    [Button]
     public void FindTarget()
     {
-        //var casts = Physics.SphereCastAll(Vector3.one, 5f);
+        var casts = Physics.SphereCastAll(Vector3.one, 5f,Vector3.forward,AttackData.AttackRange, LayerMask.GetMask("Enemy"));
+        foreach (var hit in casts)
+        {
+            if (hit.collider.TryGetComponent<Destroyable>(out var dest))
+            {
+                CurrentTarget = dest.transform;
+                return;
+            }   
+        }
+        
     }
-
-
+    
     IEnumerator Attack()
     {
-        var startTime = Time.time;
-        while (Time.time < startTime + AttackData.AttackCooldown)
+        var lastAttackTime = Time.time -  AttackData.AttackCooldown;
+        while (true)
         {
-            if (CurrentTarget != null)
+            if (Time.time > lastAttackTime + AttackData.AttackCooldown)
             {
-                AttackData.Spawn(Dice.transform,CurrentTarget);
+                if (CurrentTarget != null)
+                {
+                    var dice = Dice.transform;
+                    AttackData.Spawn(dice,dice.forward);
+                    lastAttackTime = Time.time;
+                }
+
             }
-            
+          
             yield return null;
         }
         

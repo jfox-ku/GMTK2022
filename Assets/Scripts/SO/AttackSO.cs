@@ -7,20 +7,32 @@ namespace DefaultNamespace.SO
     public class AttackSO : ScriptableObject
     {
         [TitleGroup("Data")]
-        public float AttackCooldown, AttackDamage, AttackTravelSpeed;
+        public float AttackCooldown, AttackDamage, AttackTravelSpeed, AttackRange, AttackLifetime;
         [TitleGroup("Data"),AssetsOnly,PreviewField]
         public Attack AttackPrefab;
 
         public Attack Spawn(Transform start,Transform target)
         {
-            var obj = Instantiate<Attack>(AttackPrefab);
+            Attack obj = Instantiate(AttackPrefab);
             obj.transform.position = start.position;
-            obj.Tweener.SetSpeed(AttackTravelSpeed);
-            obj.Tweener.UpdateTarget(target);
             obj.Damage = AttackDamage;
+            obj.AttackLifetime = AttackLifetime;
+            obj.AttackTravelSpeed = AttackTravelSpeed;
 
             return obj;
         }
+
+        public Attack Spawn(Transform start, Vector3 dir)
+        {
+            Attack obj = Instantiate(AttackPrefab);
+            obj.transform.position = start.position;
+            obj.Damage = AttackDamage;
+            obj.AttackLifetime = AttackLifetime;
+            obj.AttackTravelSpeed = AttackTravelSpeed;
+            obj.AttackInDirection(dir);
+            return obj;
+        }
+        
         
     }
 }

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackCooldown: 1
   AttackDamage: 10
-  AttackTravelSpeed: 1
-  AttackPrefab: {fileID: 1462832323869526586, guid: 67e890468c2c9c24b93fcb59c73faf00, type: 3}
+  AttackTravelSpeed: 10
+  AttackRange: 20
+  AttackPrefab: {fileID: 4114223134992409315, guid: 67e890468c2c9c24b93fcb59c73faf00, type: 3}
