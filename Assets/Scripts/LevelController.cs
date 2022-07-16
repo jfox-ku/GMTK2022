@@ -19,6 +19,7 @@ public class LevelController : MonoBehaviour
         spawnersLeft--;
         if (spawnersLeft == 0)
         {
+            LevelManager.Instance.IncreaseLevel();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
