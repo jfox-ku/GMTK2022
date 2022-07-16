@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, TitleGroup("Dash")] private float DashDuration, DashSpeed;
     public AnimationCurve DashMoveCurve;
     [SerializeField] public ParticleSystem DashParticle;
-    [SerializeField] private Vector3 DashParticleStartPositionOffset;
+    [SerializeField] private DiceNumberController DiceNumberController;
 
     void Update()
     {
@@ -80,7 +80,8 @@ public class PlayerController : MonoBehaviour
             UpdateFaceDirection(0.35f);
             yield return null;
         }
-
-        //UpdateVelocity(Vector3.forward);
+        
+        DiceNumberController.SetRandomTop();
+        UpdateVelocity(Vector3.zero);
     }
 }

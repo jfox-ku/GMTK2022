@@ -16,6 +16,13 @@ public class PlayerAttack : MonoBehaviour
         StartCoroutine(Attack());
     }
 
+    public float AttackRange;
+    
+    public void FindTarget()
+    {
+        //var casts = Physics.SphereCastAll(Vector3.one, 5f);
+    }
+
 
     IEnumerator Attack()
     {
