@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
@@ -19,6 +20,11 @@ public class PlayerController : MonoBehaviour
     public AnimationCurve DashMoveCurve;
     [SerializeField] public ParticleSystem DashParticle;
     [SerializeField] private DiceNumberController DiceNumberController;
+
+    private void Start()
+    {
+        DiceNumberController.SetRandomTop();
+    }
 
     void Update()
     {

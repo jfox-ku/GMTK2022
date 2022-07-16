@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace.SO;
@@ -15,6 +16,11 @@ public class Enemy : MonoBehaviour
     public Rigidbody RB;
     public GameObject EnemyModelObject;
 
+    private void Start()
+    {
+        Dest.Destroyed += Destroyed;
+    }
+
     [Button]
     public void SetEnemyType(int i)
     {
@@ -25,7 +31,10 @@ public class Enemy : MonoBehaviour
         Dest.health = EnemyData.Health;
         
     }
-    
-    
-    
+
+    private void Destroyed()
+    {
+        Dest.Destroyed -= Destroyed;
+        ParticleManager.Instance.PlayChipDestoyEffect(transform, Vector3.up, Vector3.one);
+    }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class Destroyable : MonoBehaviour
 {
     public float health;
-
+    public Action Destroyed;
 
     public void TakeDamage(float dmg)
     {
@@ -15,6 +16,7 @@ public class Destroyable : MonoBehaviour
 
     private void Die()
     {
+        Destroyed?.Invoke();
         Destroy(this.gameObject);
     }
 

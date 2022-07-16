@@ -7,16 +7,35 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public AttackSO AttackData;
+    public List<AttackSO> AttackDatum;
+    public AttackSO AttackData => AttackDatum[attackIndex];
     public Transform Dice;
     public Transform CurrentTarget;
+
+    public Coroutine AttackRoutine;
+    [SerializeField]
+    private int attackIndex;
+    
     [Button]
     public void Start()
     {
         FindTarget();
-        StartCoroutine(Attack());
+        DiceNumberController.TopNumberChanged += SetAttackIndex;
+        AttackRoutine = StartCoroutine(Attack());
     }
-    
+
+    private void SetAttackIndex(int i)
+    {
+        if(AttackRoutine!=null) StopCoroutine(AttackRoutine);
+        attackIndex = i;
+        AttackRoutine = StartCoroutine(Attack());
+    }
+
+    public void OnDestroy()
+    {
+        DiceNumberController.TopNumberChanged -= SetAttackIndex;
+    }
+
     [Button]
     public void FindTarget()
     {
@@ -34,10 +53,10 @@ public class PlayerAttack : MonoBehaviour
     
     IEnumerator Attack()
     {
-        var lastAttackTime = Time.time -  AttackData.AttackCooldown;
+        var lastAttackTime = Time.time -  AttackData.AttackCooldown - 1f;
         while (true)
         {
-            if (Time.time > lastAttackTime + AttackData.AttackCooldown)
+            if (Time.time >= lastAttackTime + AttackData.AttackCooldown)
             {
                 if (CurrentTarget != null)
                 {

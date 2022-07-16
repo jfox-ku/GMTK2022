@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1180251071464269290}
   - component: {fileID: 8808574967269676102}
   - component: {fileID: 5811578097098043165}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Chips_25
-  m_TagString: Untagged
+  m_TagString: Destroyable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
