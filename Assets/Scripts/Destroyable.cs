@@ -8,11 +8,22 @@ public class Destroyable : MonoBehaviour
     public bool isPlayer = false;
     public float health;
     public Action Destroyed;
+    public static Action<float> PlayerPercentHealthLeft;
+
+    private float maxHealth;
+    private void Start()
+    {
+        maxHealth = health;
+    }
 
     public void TakeDamage(float dmg)
     {
         health -= dmg;
-        if(isPlayer) ParticleManager.Instance.PlayPlayerDamagedParticle(PlayerController.PlayerDice,Vector3.up);
+        if (isPlayer)
+        {
+            ParticleManager.Instance.PlayPlayerDamagedParticle(PlayerController.PlayerDice,Vector3.up);
+            PlayerPercentHealthLeft?.Invoke(health/maxHealth);
+        }
         if (!CheckAlive) Die();
         
     }
