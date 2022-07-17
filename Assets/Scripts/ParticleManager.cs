@@ -24,7 +24,7 @@ public class ParticleManager : MonoBehaviour
 
     public void PlayParticlePickUpEffect(Vector3 pos)
     {
-        var effect = Instantiate(HitEffect, transform);
+        var effect = Instantiate(PickUpEffect, transform);
         effect.transform.position = pos;
     }
 
