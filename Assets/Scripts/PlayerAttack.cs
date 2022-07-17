@@ -46,7 +46,7 @@ public class PlayerAttack : MonoBehaviour
     [Button]
     public void FindTarget()
     {
-        var casts = Physics.SphereCastAll(Vector3.one, 5f,Vector3.forward,AttackData.AttackRange, LayerMask.GetMask("Enemy"));
+        var casts = Physics.SphereCastAll(Vector3.one, 5f,Vector3.forward,10f, LayerMask.GetMask("Enemy"));
         foreach (var hit in casts)
         {
             if (hit.collider.TryGetComponent<Destroyable>(out var dest))
@@ -90,7 +90,9 @@ public class PlayerAttack : MonoBehaviour
                 if (CurrentTarget != null)
                 {
                     var dice = Dice.transform;
-                    AttackData.Spawn(dice,AttackData.AttackBackward? -dice.forward : Dice.forward);
+                    var diceDir = AttackData.AttackBackward ? -dice.forward : Dice.forward;
+                    diceDir[1] = 0f;
+                    AttackData.Spawn(dice,diceDir);
                     lastAttackTime = Time.time;
                 }
 

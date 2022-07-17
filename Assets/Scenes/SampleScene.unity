@@ -4664,7 +4664,7 @@ MonoBehaviour:
   HitEffect: {fileID: 100000, guid: 86a55ba1a6ea09b44a64a8f9ad7c71cc, type: 3}
   BulletExpEffect: {fileID: 100000, guid: 86a55ba1a6ea09b44a64a8f9ad7c71cc, type: 3}
   ChipDestroyEffect: {fileID: 1892078723244562, guid: d1df9572a3e801d42b01bd1b551b5f69, type: 3}
-  PlayerDamagedParticle: {fileID: 0}
+  PlayerDamagedParticle: {fileID: 100006, guid: 456f5af945afd1249baa51d3c0ef06b9, type: 3}
 --- !u!43 &1830861824
 Mesh:
   m_ObjectHideFlags: 0
@@ -5867,6 +5867,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5405276452778483201, guid: d609a2aef19c1f043a5dabf6237c1ae2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405276452778483201, guid: d609a2aef19c1f043a5dabf6237c1ae2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405276452778483201, guid: d609a2aef19c1f043a5dabf6237c1ae2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405276452778483201, guid: d609a2aef19c1f043a5dabf6237c1ae2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405276452778483201, guid: d609a2aef19c1f043a5dabf6237c1ae2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7372993632440750980, guid: d609a2aef19c1f043a5dabf6237c1ae2, type: 3}
       propertyPath: m_RootOrder
       value: 6
