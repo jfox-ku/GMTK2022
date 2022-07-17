@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff59476856fc6c48a97e1ff7d213385, type: 3}
   m_Name: AttackLifetimeIncrease
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 100002, guid: 275cac12534d2a248b9c1939c685c28d, type: 3}
   AttackDamagePercentDelta: 0
   AttackTravelSpeedPercentDelta: 0
   AttackSizePercentDelta: 0

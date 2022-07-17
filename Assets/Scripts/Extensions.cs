@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 
 namespace DefaultNamespace

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff59476856fc6c48a97e1ff7d213385, type: 3}
   m_Name: Attack Increase
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 100004, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
   AttackDamagePercentDelta: 0.1
   AttackTravelSpeedPercentDelta: 0
   AttackSizePercentDelta: 0

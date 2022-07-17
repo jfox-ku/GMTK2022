@@ -21,7 +21,10 @@ public class Tweener : MonoBehaviour
 	
 	
 	[SerializeField,TitleGroup("Settings"),MinValue(0.001f)] private float ReachedDistance = 0.05f;
-	[SerializeField,TitleGroup("Settings")] private bool ContinueChasing = false;
+	[SerializeField,TitleGroup("Settings")] private bool ContinueChasing = false , FixedDistance = false;
+
+	[SerializeField, TitleGroup("Settings")]
+	public bool FaceTarget;
 	private bool _reachedTarget = false;
 		
 	public enum UpdateMode{ Default, Physics, UI }
@@ -29,12 +32,18 @@ public class Tweener : MonoBehaviour
 	
 	private void OnUpdate(){
 		if(!target) return;
-		
-        if(position) transform.position = Vector3.Lerp(
-			transform.position,
-			target.position,
-			Time.deltaTime * speed
-		);
+		var dir = Vector3.zero;
+        if(position) {
+	        var pos = Vector3.Lerp(transform.position, target.position, Time.deltaTime * speed);
+	        dir = (transform.position - pos).normalized;
+	        transform.position = pos;
+	        
+	        if (FaceTarget)
+	        {
+		        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), 0.2f);
+	        }
+	        
+        }
 		
         if(rotation) transform.rotation = Quaternion.Lerp(
 			transform.rotation,
@@ -47,6 +56,8 @@ public class Tweener : MonoBehaviour
 			target.localScale,
 			Time.deltaTime * scaleSpeed
 		);
+
+        
 
         if (transform.GetDistance(target.position) <= ReachedDistance)
         {
