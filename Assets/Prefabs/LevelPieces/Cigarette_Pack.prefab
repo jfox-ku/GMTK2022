@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4989339833315795197}
   - component: {fileID: 8255777278176374616}
   - component: {fileID: 6158284330081803154}
+  - component: {fileID: 4660720246593540770}
   m_Layer: 0
   m_Name: Cigarette_Pack
   m_TagString: Untagged
@@ -82,3 +83,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4660720246593540770
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5653814719921715783}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5155773166972471692, guid: 8becdd0f408c4004688a79fadbc0218b, type: 3}
