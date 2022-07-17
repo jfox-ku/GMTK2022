@@ -8,7 +8,7 @@ namespace DefaultNamespace.SO
     {
         [TitleGroup("Data")]
         public float _attackCooldown, _attackDamage, _attackTravelSpeed, _attackLifetime, _attackSize;
-        [TitleGroup("Data"),AssetsOnly,PreviewField]
+        [TitleGroup("Data")]
         public Attack AttackPrefab;
         public float _attackCooldownMultiplier, _attackDamageMultiplier, _attackTravelSpeedMultiplier, _attackLifetimeMultiplier = 1f, _attackSizeMultiplier;
 

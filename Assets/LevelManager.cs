@@ -18,7 +18,12 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        Instantiate(Levels[CurrentLevel.Value]);
+        if(Instance.CurrentLevel.Value!=0) StartLevel();
+    }
+
+    public static void StartLevel()
+    {
+        Instantiate(Instance.Levels[Instance.CurrentLevel.Value%Instance.Levels.Count]);
     }
 
     public void IncreaseLevel()
