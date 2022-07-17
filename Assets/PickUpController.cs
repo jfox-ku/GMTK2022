@@ -13,9 +13,12 @@ public class PickUpController : MonoBehaviour
     public GameObject SpawnedObject;
     public bool Respawn = false;
     public float SpawnDelay, RespawnDelay;
+    public int MaxSpawnCount = 3;
+    private int currentSpawnCount = 0;
 
     private IEnumerator Start()
     {
+        currentSpawnCount = 0;
         if (SpawnedObject != null) DestroyImmediate(SpawnedObject);
         yield return new WaitForSeconds(SpawnDelay);
         Spawn();
@@ -24,10 +27,11 @@ public class PickUpController : MonoBehaviour
     [Button]
     public void Spawn()
     {
+        if (currentSpawnCount >= MaxSpawnCount) return;
         if (SpawnedObject != null) DestroyImmediate(SpawnedObject);
 
-
         SpawnedObject = Data.Spawn();
+        currentSpawnCount++;
         SpawnedObject.transform.parent = transform;
         SpawnedObject.transform.localPosition = Vector3.zero;
     }

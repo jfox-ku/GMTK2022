@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,6 +30,15 @@ public class LevelController : MonoBehaviour
             });
 
         }
+    }
+    
+    [Button]
+    public void ReadSpawners()
+    {
+        Spawners.Clear();
+        var sp = gameObject.GetComponentsInChildren<EnemySpawner>();
+        Spawners.AddRange(sp);
+        
     }
 
     private void StartLevel()
