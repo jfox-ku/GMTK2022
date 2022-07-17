@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2870245538634810768}
   - component: {fileID: 1187528123910277685}
   - component: {fileID: 4007647043154984703}
+  - component: {fileID: 2867398058026295986}
   m_Layer: 0
   m_Name: Whishkey_Glass
   m_TagString: Untagged
@@ -82,3 +83,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &2867398058026295986
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3215281721231154986}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.010808576
+  m_Height: 0.03884743
+  m_Direction: 2
+  m_Center: {x: -0.000000007062441, y: 0.0000000015820854, z: 0.006467291}

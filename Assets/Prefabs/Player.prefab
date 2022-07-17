@@ -50,13 +50,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Dest: {fileID: 852148421}
-  ImmunityDuration: 0.1
-  ImmunityCooldown: 0.5
-  LastImmunityTime: 0
+  ImmunityDuration: 1
+  LastHitTime: 0
   RB: {fileID: 1443342114}
   MoveSpeed: 8
   RotationPercent: 0.5
   Dice: {fileID: 1443342115}
+  Attacker: {fileID: 8343138752108099572}
   DashCooldown: 1
   DashDuration: 0.27
   DashSpeed: 35
@@ -108,6 +108,7 @@ MonoBehaviour:
   Dice: {fileID: 5405276452778483201}
   CurrentTarget: {fileID: 0}
   attackIndex: 0
+  AimDistance: 25
 --- !u!114 &852148421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,19 +215,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 932991390270a8c45bcec0502b6d27a8, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.72698665
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 932991390270a8c45bcec0502b6d27a8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.44550768
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 932991390270a8c45bcec0502b6d27a8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.27301338
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 932991390270a8c45bcec0502b6d27a8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.44550768
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 932991390270a8c45bcec0502b6d27a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
