@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9efd5935461042eaa6f1c1dc0d63bf14, type: 3}
   m_Name: 1
   m_EditorClassIdentifier: 
-  _attackCooldown: 1.4
+  _attackCooldown: 0.8
   _attackDamage: 10
   _attackTravelSpeed: 0.1
   _attackLifetime: 1
