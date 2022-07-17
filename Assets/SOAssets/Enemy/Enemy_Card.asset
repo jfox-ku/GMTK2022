@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 80
   ChaseSpeed: 0.25
-  FaceTarget: 0
+  FaceTarget: 1
+  Weight: 3
   Prefab: {fileID: 699501876569080708, guid: d596d9580ee07734480e278c8669d7c4, type: 3}

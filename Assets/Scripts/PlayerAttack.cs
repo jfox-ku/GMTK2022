@@ -110,7 +110,8 @@ public class PlayerAttack : MonoBehaviour
                 var iDir = worldPos - transform.position;
                 iDir[1] = 0f;
                 iDir = iDir.normalized;
-                Debug.Log($"Touch: {touchPos} WorldTouch: {worldPos}\nPlayerPos: {transform.position} FinalDir{iDir}");
+                if (AttackData.AttackBackward) iDir *= -1f;
+                    //Debug.Log($"Touch: {touchPos} WorldTouch: {worldPos}\nPlayerPos: {transform.position} FinalDir{iDir}");
                 
                 // var diceDir = AttackData.AttackBackward ? -dice.forward : Dice.forward;
                 // diceDir[1] = 0f;
