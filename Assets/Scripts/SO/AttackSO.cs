@@ -7,10 +7,10 @@ namespace DefaultNamespace.SO
     public class AttackSO : ScriptableObject
     {
         [TitleGroup("Data")]
-        public float _attackCooldown, _attackDamage, _attackTravelSpeed, _attackLifetime;
+        public float _attackCooldown, _attackDamage, _attackTravelSpeed, _attackLifetime, _attackSize;
         [TitleGroup("Data"),AssetsOnly,PreviewField]
         public Attack AttackPrefab;
-        public float _attackCooldownMultiplier, _attackDamageMultiplier, _attackTravelSpeedMultiplier, _attackLifetimeMultiplier = 1f;
+        public float _attackCooldownMultiplier, _attackDamageMultiplier, _attackTravelSpeedMultiplier, _attackLifetimeMultiplier = 1f, _attackSizeMultiplier;
 
         [TitleGroup("Data")] public bool AttackBackward;
 
@@ -38,6 +38,21 @@ namespace DefaultNamespace.SO
             set => _attackLifetime = value;
         }
 
+        public float AttackSize
+        {
+            get => _attackSize * _attackSizeMultiplier;
+            set => _attackSize = value;
+        }
+
+        public void ResetMultipliers()
+        {
+            _attackCooldownMultiplier = 1f;
+            _attackDamageMultiplier = 1f;
+            _attackLifetimeMultiplier = 1f;
+            _attackTravelSpeedMultiplier = 1f;
+            _attackSizeMultiplier = 1f;
+        }
+
         public Attack Spawn(Transform start,Transform target)
         {
             Attack obj = Instantiate(AttackPrefab);
@@ -52,7 +67,9 @@ namespace DefaultNamespace.SO
         public Attack Spawn(Transform start, Vector3 dir)
         {
             Attack obj = Instantiate(AttackPrefab);
-            obj.transform.position = start.position;
+            var t = obj.transform;
+            t.position = start.position;
+            t.localScale = Vector3.one * AttackSize;
             obj.Damage = AttackDamage;
             obj.AttackLifetime = AttackLifetime;
             obj.AttackTravelSpeed = AttackTravelSpeed;

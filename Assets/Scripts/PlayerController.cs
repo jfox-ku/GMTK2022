@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [TitleGroup("Health")]
     public Destroyable Dest;
 
-    [TitleGroup("Health")] public float ImmunityDuration, ImmunityCooldown, LastImmunityTime;
+    [TitleGroup("Health")] public float ImmunityDuration, LastHitTime;
     [TitleGroup("Movement")] public Rigidbody RB;
     [TitleGroup("Movement")] public float MoveSpeed = 1f;
 
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public float RotationPercent;
 
     public DiceRollerTweener Dice;
+    public PlayerAttack Attacker;
 
     private bool usedDash;
     [SerializeField, TitleGroup("Dash")] private float DashCooldown;
@@ -33,10 +34,6 @@ public class PlayerController : MonoBehaviour
 
     public static Transform PlayerDice => PlayerInstance.RB.transform;
     
-    [ShowInInspector]
-    public bool IsImmune => LastImmunityTime + ImmunityDuration > Time.time;
-    [ShowInInspector]
-    public bool IsImmuneInCooldown => LastImmunityTime + ImmunityCooldown > Time.time;
     
     private void Awake()
     {
@@ -142,7 +139,24 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Destroyable"))
         {
+
+            if (LastHitTime + ImmunityDuration > Time.time) return;
+            LastHitTime = Time.time;
             Dest.TakeDamage(5);
+        }
+        
+        
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("PickUp"))
+        {
+            var pu = collision.gameObject.GetComponentInParent<PickUpController>();
+            if(pu!=null)
+            {
+                pu.Apply(this);
+            }
         }
     }
 }

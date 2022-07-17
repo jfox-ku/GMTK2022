@@ -19,7 +19,7 @@ namespace DefaultNamespace
         public static IEnumerator StickRoutine(this Transform source, Transform target, Vector3 offset, float duration)
         {
             var startTime = Time.time;
-            while (Time.time < startTime + duration && source!=null)
+            while (Time.time < startTime + duration && source!=null && target!=null)
             {
                 source.position = target.position + offset;
                 yield return null;

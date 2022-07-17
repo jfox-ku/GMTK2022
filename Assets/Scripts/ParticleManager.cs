@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
@@ -6,13 +7,25 @@ using UnityEngine;
 public class ParticleManager : MonoBehaviour
 {
     public static ParticleManager Instance;
-    public GameObject HitEffect, BulletExpEffect, ChipDestroyEffect, PlayerDamagedParticle;
+    public GameObject HitEffect, BulletExpEffect, ChipDestroyEffect, PlayerDamagedParticle, PickUpEffect;
 
 
     // Start is called before the first frame update
     void Awake()
     {
         Instance = this;
+        PickUpController.ParticlePickedUpPositionEvent += PlayParticlePickUpEffect;
+    }
+
+    private void OnDestroy()
+    {
+        PickUpController.ParticlePickedUpPositionEvent -= PlayParticlePickUpEffect;
+    }
+
+    public void PlayParticlePickUpEffect(Vector3 pos)
+    {
+        var effect = Instantiate(HitEffect, transform);
+        effect.transform.position = pos;
     }
 
     public void PlayHitEffect(Transform target, Vector3 offset)

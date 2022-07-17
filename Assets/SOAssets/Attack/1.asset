@@ -16,9 +16,11 @@ MonoBehaviour:
   _attackDamage: 10
   _attackTravelSpeed: 0.1
   _attackLifetime: 1
+  _attackSize: 1
   AttackPrefab: {fileID: 4114223134992409315, guid: 67e890468c2c9c24b93fcb59c73faf00, type: 3}
-  _attackCooldownMultiplier: 1
+  _attackCooldownMultiplier: 0.79999995
   _attackDamageMultiplier: 1
   _attackTravelSpeedMultiplier: 1
   _attackLifetimeMultiplier: 1
+  _attackSizeMultiplier: 1
   AttackBackward: 0

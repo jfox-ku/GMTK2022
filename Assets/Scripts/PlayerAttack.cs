@@ -27,6 +27,7 @@ public class PlayerAttack : MonoBehaviour
     [Button]
     public void Start()
     {
+        ResetMultipliers();
         FindTarget();
         AttackRoutine = StartCoroutine(Attack());
     }
@@ -37,6 +38,45 @@ public class PlayerAttack : MonoBehaviour
         attackIndex = topNum - 1;
         AttackRoutine = StartCoroutine(Attack());
     }
+    
+    public void ResetMultipliers()
+    {
+        foreach (var attackData in AttackDatum)
+        {
+            attackData.ResetMultipliers();
+        }
+    }
+
+    public void SetAttackCooldownMultiplier(float f)
+    {
+        foreach (var attackData in AttackDatum)
+        {
+            attackData._attackCooldownMultiplier = f;
+        }
+    }
+    
+    public void SetAttackLifetimeMultiplier(float f)
+    {
+        foreach (var attackData in AttackDatum)
+        {
+            attackData._attackLifetimeMultiplier = f;
+        }
+    }
+    public void SetAttackTravelSpeedMultiplier(float f)
+    {
+        foreach (var attackData in AttackDatum)
+        {
+            attackData._attackTravelSpeedMultiplier = f;
+        }
+    }
+    public void SetAttackDamageMultiplier(float f)
+    {
+        foreach (var attackData in AttackDatum)
+        {
+            attackData._attackDamageMultiplier = f;
+        }
+    }
+
 
     public void OnDestroy()
     {
@@ -66,19 +106,7 @@ public class PlayerAttack : MonoBehaviour
         else return Dice.transform.forward;
 
     }
-
-    private void OnDrawGizmos()
-    {
-        if (Application.isPlaying)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(Dice.transform.position,ClosestEnemyDirection());
-            var position = Dice.transform.position;
-            // var isHit = Physics.SphereCast(position, 50f, Vector3.forward,out var hit, 20f);
-            // if(isHit) Gizmos.DrawWireSphere(Dice.position + transform.forward * hit.distance,50f);
-            //
-        }
-    }
+    
 
     IEnumerator Attack()
     {
