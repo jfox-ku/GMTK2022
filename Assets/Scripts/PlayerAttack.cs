@@ -14,6 +14,7 @@ public class PlayerAttack : MonoBehaviour
 
     public Coroutine AttackRoutine;
     [SerializeField] private int attackIndex;
+    public float AimDistance = 5f;
 
 
     public static Action<float> AttackCooldownLeftPercent;
@@ -27,7 +28,6 @@ public class PlayerAttack : MonoBehaviour
     public void Start()
     {
         ResetMultipliers();
-        FindTarget();
     }
 
     private void SetAttackIndex(int topNum)
@@ -83,28 +83,18 @@ public class PlayerAttack : MonoBehaviour
         DiceNumberController.TopNumberChanged -= SetAttackIndex;
     }
 
-    [Button]
-    public void FindTarget()
+    private void OnDrawGizmos()
     {
-        var casts = Physics.SphereCastAll(Vector3.one, 5f, Vector3.forward, 10f, LayerMask.GetMask("Enemy"));
-        foreach (var hit in casts)
-        {
-            if (hit.collider.TryGetComponent<Destroyable>(out var dest))
-            {
-                CurrentTarget = dest.transform;
-                return;
-            }
-        }
-    }
+        var touchPos = Input.mousePosition;
+        var worldPos = Camera.main.ScreenToWorldPoint(touchPos + Vector3.forward * AimDistance);
+                
+        var iDir = worldPos - transform.position;
+        iDir[1] = 0f;
+        iDir = iDir.normalized;
 
-    public Vector3 ClosestEnemyDirection()
-    {
-        var position = Dice.transform.position;
-        var isHit = Physics.SphereCast(position, 50f, Vector3.forward, out var hit, 20f);
-        if (isHit) return (hit.point - position).normalized;
-        else return Dice.transform.forward;
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position,transform.position+iDir);
     }
-
 
     IEnumerator Attack()
     {
@@ -114,9 +104,17 @@ public class PlayerAttack : MonoBehaviour
             if (Time.time >= lastAttackTime + AttackData.AttackCooldown)
             {
                 var dice = Dice.transform;
-                var diceDir = AttackData.AttackBackward ? -dice.forward : Dice.forward;
-                diceDir[1] = 0f;
-                AttackData.Spawn(dice, diceDir);
+                var touchPos = Input.mousePosition;
+                var worldPos = Camera.main.ScreenToWorldPoint(touchPos + Vector3.forward * AimDistance);
+                
+                var iDir = worldPos - transform.position;
+                iDir[1] = 0f;
+                iDir = iDir.normalized;
+                Debug.Log($"Touch: {touchPos} WorldTouch: {worldPos}\nPlayerPos: {transform.position} FinalDir{iDir}");
+                
+                // var diceDir = AttackData.AttackBackward ? -dice.forward : Dice.forward;
+                // diceDir[1] = 0f;
+                AttackData.Spawn(dice, iDir.normalized);
                 lastAttackTime = Time.time;
                 AttackCooldownLeftPercent?.Invoke(1f);
             }
