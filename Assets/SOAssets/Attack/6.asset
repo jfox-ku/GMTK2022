@@ -23,4 +23,4 @@ MonoBehaviour:
   _attackTravelSpeedMultiplier: 1
   _attackLifetimeMultiplier: 1
   _attackSizeMultiplier: 1
-  AttackBackward: 1
+  AttackBackward: 0

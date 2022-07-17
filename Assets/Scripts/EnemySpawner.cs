@@ -40,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
     public IEnumerator Spawn()
     {
         AliveCount = 0;
-        var startTime = Time.time;
+        var startTime = Time.time - SpawnCooldown -1f;
         while (currentSpawnedCount < SpawnCount)
         {
             if (startTime + SpawnCooldown < Time.time)
@@ -50,8 +50,6 @@ public class EnemySpawner : MonoBehaviour
                 AliveCount++;
                 var enemy = Instantiate(EnemyBase,transform);
                 enemy.transform.localPosition = Vector3.zero;
-                var enemyData = AllEnemies.GetByIndex(SpawnIndex);
-               
                 enemy.SetEnemyType(SpawnIndex);
                 enemy.SetEnemyTarget(PlayerController.PlayerDice);
                 enemy.EnemyDestroyedEvent += EnemyDestoyed;

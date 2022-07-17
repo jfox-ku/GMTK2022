@@ -33,7 +33,9 @@ public class Enemy : MonoBehaviour
         Dest.health = EnemyData.Health;
         EnemyTweener.SetSpeed(EnemyData.ChaseSpeed);
         EnemyTweener.FaceTarget = EnemyData.FaceTarget;
-        
+        RB = GetComponent<Rigidbody>();
+        RB.mass = EnemyData.Weight;
+
     }
 
     public void SetEnemyTarget(Transform target)

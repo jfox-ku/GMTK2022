@@ -15,4 +15,5 @@ MonoBehaviour:
   Health: 30
   ChaseSpeed: 0.4
   FaceTarget: 0
+  Weight: 2
   Prefab: {fileID: 9044016133927966113, guid: b1a70f663c5da464698dd7454e920f8b, type: 3}
