@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff59476856fc6c48a97e1ff7d213385, type: 3}
   m_Name: Attack Travel Speed Increase
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 100000, guid: 18204b98237ccb540808f2cd2d78c2c8, type: 3}
+  Prefab: {fileID: 1545806602296978, guid: f23844d0163bcfa4493e00c1e116ee02, type: 3}
   AttackDamagePercentDelta: 0
   AttackTravelSpeedPercentDelta: 0.1
   AttackSizePercentDelta: 0

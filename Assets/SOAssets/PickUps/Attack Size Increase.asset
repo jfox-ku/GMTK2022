@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff59476856fc6c48a97e1ff7d213385, type: 3}
   m_Name: Attack Size Increase
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+  Prefab: {fileID: 1545806602296978, guid: e7fee2cef20fd8f469370546f63cefb9, type: 3}
   AttackDamagePercentDelta: 0
   AttackTravelSpeedPercentDelta: 0
   AttackSizePercentDelta: 0.1
