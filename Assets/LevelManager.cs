@@ -11,8 +11,11 @@ public class LevelManager : MonoBehaviour
     public List<LevelController> Levels;
     public IntVariable CurrentLevel;
 
+    public static bool Block = false;
+
     private void Awake()
     {
+        Block = true;
         Instance = this;
     }
 
@@ -23,6 +26,7 @@ public class LevelManager : MonoBehaviour
 
     public static void StartLevel()
     {
+        Block = false;
         Instantiate(Instance.Levels[Instance.CurrentLevel.Value%Instance.Levels.Count]);
     }
 

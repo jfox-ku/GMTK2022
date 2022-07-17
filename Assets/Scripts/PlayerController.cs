@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (LevelManager.Block) return;
         Vector3 moveInput = Vector3.zero;
 
         if (Input.GetKey(KeyCode.W)) moveInput += Vector3.forward;
