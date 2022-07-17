@@ -50,6 +50,8 @@ public class EnemySpawner : MonoBehaviour
                 AliveCount++;
                 var enemy = Instantiate(EnemyBase,transform);
                 enemy.transform.localPosition = Vector3.zero;
+                var enemyData = AllEnemies.GetByIndex(SpawnIndex);
+               
                 enemy.SetEnemyType(SpawnIndex);
                 enemy.SetEnemyTarget(PlayerController.PlayerDice);
                 enemy.EnemyDestroyedEvent += EnemyDestoyed;

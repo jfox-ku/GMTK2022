@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -19,7 +18,7 @@ namespace DefaultNamespace
         public static IEnumerator StickRoutine(this Transform source, Transform target, Vector3 offset, float duration)
         {
             var startTime = Time.time;
-            while (Time.time < startTime + duration)
+            while (Time.time < startTime + duration && source!=null && target!=null)
             {
                 source.position = target.position + offset;
                 yield return null;

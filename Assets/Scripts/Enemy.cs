@@ -31,6 +31,8 @@ public class Enemy : MonoBehaviour
         if(EnemyModelObject!=null) DestroyImmediate(EnemyModelObject);
         EnemyModelObject = Instantiate(EnemyData.Prefab,transform);
         Dest.health = EnemyData.Health;
+        EnemyTweener.SetSpeed(EnemyData.ChaseSpeed);
+        EnemyTweener.FaceTarget = EnemyData.FaceTarget;
         
     }
 

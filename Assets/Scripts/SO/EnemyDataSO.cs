@@ -8,6 +8,7 @@ public class EnemyDataSO : ScriptableObject
 {
     public float Health = 100f;
     public float ChaseSpeed = 0.2f;
+    public bool FaceTarget = false;
     [AssetsOnly]
     public GameObject Prefab;
 }

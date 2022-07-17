@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7372993632440750976}
   - component: {fileID: 8343138752108099572}
   - component: {fileID: 852148421}
+  - component: {fileID: 1443342114}
+  - component: {fileID: 1443342115}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -51,9 +53,10 @@ MonoBehaviour:
   ImmunityDuration: 0.1
   ImmunityCooldown: 0.5
   LastImmunityTime: 0
-  RB: {fileID: 8258213391982593969}
+  RB: {fileID: 1443342114}
   MoveSpeed: 8
   RotationPercent: 0.5
+  Dice: {fileID: 1443342115}
   DashCooldown: 1
   DashDuration: 0.27
   DashSpeed: 35
@@ -119,6 +122,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayer: 0
   health: 100
+--- !u!54 &1443342114
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7372993632440750981}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &1443342115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7372993632440750981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c356cea7b97459c4a9428b1e2c76f53a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Source: {fileID: 5405276452778483201}
+  Rotation: {x: -360, y: 0, z: -360}
+  DurationMultiplier: 1.5
+  TweenCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &5515184645439257066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -156,19 +214,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 932991390270a8c45bcec0502b6d27a8, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.72698665
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 932991390270a8c45bcec0502b6d27a8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.44550768
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 932991390270a8c45bcec0502b6d27a8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.27301338
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 932991390270a8c45bcec0502b6d27a8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.44550768
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 932991390270a8c45bcec0502b6d27a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -238,22 +296,6 @@ MonoBehaviour:
   - {fileID: 2800000, guid: fbf52865025e6c14f805adca450f9484, type: 3}
   - {fileID: 2800000, guid: c901a8e72bd246c498395f4039a0bc1c, type: 3}
   TopNum: 3
---- !u!54 &8258213391982593969
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4632153320978728123}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!65 &2124633551516322215
 BoxCollider:
   m_ObjectHideFlags: 0

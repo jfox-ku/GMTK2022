@@ -10,5 +10,7 @@ namespace DefaultNamespace.SO
         public List<EnemyDataSO> AllEnemies;
 
         public EnemyDataSO GetByIndex(int i) => AllEnemies[i];
+
+      
     }
 }

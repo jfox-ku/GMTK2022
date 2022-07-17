@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Enemy_100DollarChip
   m_EditorClassIdentifier: 
   Health: 60
-  ChaseSpeed: 0.001
+  ChaseSpeed: 0.3
+  FaceTarget: 0
   Prefab: {fileID: 8111902545066073920, guid: b33649103884c0c409b258f05f17e4f2, type: 3}

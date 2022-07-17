@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
+    public static Action LevelComplete;
     public List<EnemySpawner> Spawners;
     public int spawnersLeft;
     
@@ -19,7 +21,13 @@ public class LevelController : MonoBehaviour
         spawnersLeft--;
         if (spawnersLeft == 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            LevelManager.Instance.IncreaseLevel();
+            LevelComplete?.Invoke();
+            DOVirtual.DelayedCall(4f, () =>
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            });
+
         }
     }
 

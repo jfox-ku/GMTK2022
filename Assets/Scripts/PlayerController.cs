@@ -2,22 +2,27 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController PlayerInstance;
+    public static float PlayerDashDuration => PlayerInstance.DashDuration;
     
     [TitleGroup("Health")]
     public Destroyable Dest;
 
-    [TitleGroup("Health")] public float ImmunityDuration, ImmunityCooldown, LastImmunityTime;
+    [TitleGroup("Health")] public float ImmunityDuration, LastHitTime;
     [TitleGroup("Movement")] public Rigidbody RB;
     [TitleGroup("Movement")] public float MoveSpeed = 1f;
 
     [TitleGroup("Movement"), Range(0f, 1f)]
     public float RotationPercent;
+
+    public DiceRollerTweener Dice;
+    public PlayerAttack Attacker;
 
     private bool usedDash;
     [SerializeField, TitleGroup("Dash")] private float DashCooldown;
@@ -28,20 +33,29 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private DiceNumberController DiceNumberController;
 
     public static Transform PlayerDice => PlayerInstance.RB.transform;
-
-    public bool IsImmune => LastImmunityTime + ImmunityDuration < Time.time;
-    public bool IsImmuneInCooldown => LastImmunityTime + ImmunityCooldown > Time.time;
+    
     
     private void Awake()
     {
         //Dest.health = 100f;
         Dest.isPlayer = true;
+        Dest.Destroyed += PlayerDied;
         PlayerInstance = this;
     }
 
     private void Start()
     {
         DiceNumberController.SetRandomTop();
+    }
+
+    public void PlayerDied()
+    {
+        Dest.Destroyed -= PlayerDied;
+        
+        DOVirtual.DelayedCall(2f, () =>
+        {
+            LevelManager.ReloadScene();
+        });
     }
 
     void Update()
@@ -99,6 +113,16 @@ public class PlayerController : MonoBehaviour
     {
         float startTime = Time.time;
         DashParticle.Play();
+        Dice.Flip().OnComplete(()=>
+        {
+            DiceNumberController.SetRandomTop();
+            Dice.Source.transform.localEulerAngles = Vector3.zero;
+            var temp = transform.localEulerAngles;
+            temp[0] = 0f;
+            transform.localEulerAngles = temp;
+
+        });
+        
         while (Time.time < startTime + DashDuration)
         {
             var timeDiff = Time.time - startTime;
@@ -108,16 +132,31 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
         
-        DiceNumberController.SetRandomTop();
         UpdateVelocity(Vector3.zero);
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Destroyable") && !IsImmune && !IsImmuneInCooldown)
+        if (collision.gameObject.CompareTag("Destroyable"))
         {
-            LastImmunityTime = Time.time;
+
+            if (LastHitTime + ImmunityDuration > Time.time) return;
+            LastHitTime = Time.time;
             Dest.TakeDamage(5);
+        }
+        
+        
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("PickUp"))
+        {
+            var pu = collision.gameObject.GetComponentInParent<PickUpController>();
+            if(pu!=null)
+            {
+                pu.Apply(this);
+            }
         }
     }
 }
